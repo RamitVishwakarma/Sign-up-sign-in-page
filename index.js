@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 mongoose
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-app.get("/signup", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/signup.html");
 });
 app.post("/signup", async (req, res) => {
