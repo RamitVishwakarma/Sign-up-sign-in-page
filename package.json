@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.2"
+  },
+  "name": "sign-up-sign-in-page",
+  "description": "simple signup sign in page",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramit Vishwakarma",
+  "license": "ISC"
+}

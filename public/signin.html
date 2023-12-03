@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGN IN</title>
+    <link rel="stylesheet" href="signup.css" />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="content">
+        <form action="/signin" method="post">
+          <div class="signup">SIGN IN</div>
+          <hr class="line" />
+          <!-- <input type="text" placeholder="Name" autocomplete="off" /> -->
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="on" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="on" />
+          <div class="error-message" style="color: red; display: none"></div>
+          <!-- <input type="password" placeholder="Confirm password" /> -->
+
+          <button class="getStarted" type="submit">Get Started</button>
+          <div class="signin">
+            Don't have an account?
+            <a class="signinanchor" href="signup">Sign up </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="signin.js"></script>
+</html>

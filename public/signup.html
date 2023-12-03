@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGN UP</title>
+    <link rel="stylesheet" href="signup.css" />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="content">
+        <form action="/signup" method="post">
+          <div class="signup">SIGN UP</div>
+          <hr class="line" />
+          <input name="name" type="text" placeholder="Name" />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            autocomplete="on" />
+          <input name="password" type="password" placeholder="Password" />
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm password" />
+          <div class="error-message" style="color: red; display: none"></div>
+
+          <button class="getStarted" type="submit">Get Started</button>
+          <div class="signin">
+            Have an account?
+            <a class="signinanchor" href="signin">Sign in </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <div class="footer">&copy;Copyright @2023</div> -->
+  </body>
+  <script src="signup.js"></script>
+  <!-- <footer></footer> -->
+</html>
