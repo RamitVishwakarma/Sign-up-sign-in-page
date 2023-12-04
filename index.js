@@ -1,12 +1,15 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const env = require("dotenv");
+env.config();
 mongoose
-  .connect("mongodb://127.0.0.1:27017/user")
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+const port = process.env.PORT || 4000;
 
 const UserSchema = new mongoose.Schema({
   name: String,
