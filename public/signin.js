@@ -1,15 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("form").addEventListener("submit", function (event) {
-    // Prevent form submission
     event.preventDefault();
-
-    // const name = document.querySelector('input[name="name"]').value;
     const email = document.querySelector('input[name="email"]').value;
     const password = document.querySelector('input[name="password"]').value;
-    // const confirmPassword = document.querySelector(
-    //   'input[name="confirmPassword"]'
-    // ).value;
-
     let errorMessage = "";
 
     if (!email || !password) {
@@ -20,8 +13,26 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".error-message").textContent = errorMessage;
       document.querySelector(".error-message").style.display = "block";
     } else {
-      // If no errors, submit the form data
-      this.submit();
+      // this.submit();
+      fetch("/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            // Display server-side error message
+            document.querySelector(".error-message").textContent = data.message;
+            document.querySelector(".error-message").style.display = "block";
+          } else {
+            // Handle successful response
+            // alert("Signup successful! You can SignIn now");
+            this.submit();
+          }
+        });
     }
   });
 });

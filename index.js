@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const env = require("dotenv");
+// const prompt = require("prompt");
 env.config();
 mongoose
   .connect(process.env.MONGO_URL)
@@ -24,39 +25,35 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
+app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/public/signup.html");
 });
 app.post("/signup", async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
-    if (!name || !email || !password || !confirmPassword) {
-      return res.status(400).send("All fields are required.");
-    }
-    if (password !== confirmPassword) {
-      return res.status(400).send("Passwords do not match.");
-    }
-
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
-      return res.status(400).send("User already exists");
+      return res
+        .status(400)
+        .json({ error: true, message: "User already exists" });
     }
     // Hash password
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create new user
+    // Crea  new user
     const newUser = new User({
       name: name,
       email: email,
       password: hashedPassword, // Store the hashed password
     });
-
     // Save the user
     await newUser.save();
 
     //User registerd also this tym mongo is still saving
-    res.status(201).send("User registered successfully");
+    res
+      .status(201)
+      .json({ error: true, message: "User registered successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error in user registration");
@@ -73,16 +70,20 @@ app.post("/signin", async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user) {
       //no user found
-      return res.status(401).send("Invalid email or password.");
+      return res.status(401).json({ error: true, message: "Invalid email." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     // console.log(login);
     if (isMatch) {
       // Matching pass
-      res.send("Login successful!");
+      return res
+        .status(200)
+        .json({ error: true, message: "Login successful!" });
     } else {
-      res.status(401).send("Invalid email or password.");
+      return res
+        .status(401)
+        .json({ error: true, message: "Invalid password." });
     }
   } catch (error) {
     console.error(error);
@@ -91,5 +92,5 @@ app.post("/signin", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`server running at ${port}`);
+  console.log(`Server running at ${port}`);
 });
